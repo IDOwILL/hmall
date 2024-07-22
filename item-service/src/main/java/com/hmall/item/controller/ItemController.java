@@ -70,6 +70,7 @@ public class ItemController {
 
     /**
      * 分页查询问题五
+     *
      * @return
      */
     @GetMapping("/list")
@@ -77,5 +78,17 @@ public class ItemController {
         log.info("商品分页查询：{}", dto);
         Page<Item> page = itemService.page(new Page<>(dto.getPage(), dto.getSize()));
         return Result.success(new PageVO<>(page.getTotal(), page.getRecords()));
+    }
+
+    /**
+     * 根据id查询商品
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    public Result queryById(@PathVariable Long id) {
+        Item item = itemService.getById(id);
+        log.info("根据id查询商品：{}",id);
+        return Result.success(item);
     }
 }
