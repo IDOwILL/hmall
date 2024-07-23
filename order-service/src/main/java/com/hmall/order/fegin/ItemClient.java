@@ -6,6 +6,7 @@ import com.hmall.order.result.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @FeignClient(value = "itemservice")
 public interface ItemClient {
@@ -16,4 +17,13 @@ public interface ItemClient {
      */
     @GetMapping("item/{id}")
     Result<Item> queryById(@PathVariable("id") Long id);
+
+    /**
+     * 减少订单
+     * @param itemId
+     * @param num
+     */
+    @PutMapping("/item/stock/{itemId}/{num}")
+    void reduceItem(@PathVariable("itemId") Long itemId,
+                    @PathVariable("num") Integer num);
 }

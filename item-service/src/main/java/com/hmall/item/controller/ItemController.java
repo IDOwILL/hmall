@@ -91,4 +91,15 @@ public class ItemController {
         log.info("根据id查询商品：{}",id);
         return Result.success(item);
     }
+
+    /**
+     * 扣减库存
+     * @return
+     */
+    @PutMapping("/stock/{itemId}/{num}")
+    public Result reduceStock(@PathVariable Long itemId,
+                              @PathVariable Integer num) {
+        itemService.updateStock(itemId,num);
+        return Result.success();
+    }
 }

@@ -59,6 +59,8 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> implements IOr
         orderMapper.insert(order);
         OrderDetail orderDetail = OrderDetail.builder().orderId(order.getId()).itemId(dto.getItemId()).num(dto.getNum()).price(item.getPrice()).spec(item.getSpec()).image(item.getImage()).build();
         orderDetailMapper.insert(orderDetail);
+        //记得减少订单
+        itemClient.reduceItem(dto.getItemId(),dto.getNum());
 
         return order.getId();
     }
