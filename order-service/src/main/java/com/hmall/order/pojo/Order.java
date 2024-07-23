@@ -1,20 +1,25 @@
 package com.hmall.order.pojo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.checkerframework.checker.units.qual.A;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
 @TableName("tb_order")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Order{
     /**
      * 订单编号
      */
-    @TableId(type = IdType.INPUT)
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
     /**
      * 商品金额
@@ -36,7 +41,8 @@ public class Order{
     /**
      * 创建订单时间
      */
-    private Date createTime;
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
     /**
      * 付款时间
      */
@@ -60,5 +66,6 @@ public class Order{
     /**
      * 更新时间
      */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 }

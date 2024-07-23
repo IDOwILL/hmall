@@ -1,13 +1,17 @@
 package com.hmall.order.pojo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @TableName("tb_order_detail")
 public class OrderDetail {
     /**
@@ -30,6 +34,7 @@ public class OrderDetail {
     /**
      * 商品标题
      */
+    @TableField("name")
     private String title;
     /**
      * 商品单价
@@ -46,9 +51,11 @@ public class OrderDetail {
     /**
      * 创建时间
      */
+    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
     /**
      * 更新时间
      */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 }
